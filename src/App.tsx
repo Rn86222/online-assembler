@@ -8,8 +8,9 @@ const App: React.FC = () => {
   const [inputText, setInputText] = useState<string>('');
   const wasm = import('assembler-by-wasm');
   wasm.then((wasm) => {
-    init();
-    console.log(wasm.assemble("addi x1, x0, 1", "2"));
+    init(wasm).then(() => {
+      console.log(wasm.assemble("addi x1, x0, 1", "2"));
+    });
   });
 
   return (
