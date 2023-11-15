@@ -12,7 +12,8 @@ const App: React.FC = () => {
   useEffect(() => {
     // テキストが変更されるたびに非同期関数を呼び出す
     const fetchData = async () => {
-      await init('node_modules/assembler-by-wasm/assembler_by_wasm_bg.wasm');
+      // await init('node_modules/assembler-by-wasm/assembler_by_wasm_bg.wasm');
+      await init();
       // 非同期処理が完了した後にテキストを表示する状態を更新
       setDisplayedText(assemble(inputText, "16"));
     };
