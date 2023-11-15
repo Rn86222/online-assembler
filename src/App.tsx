@@ -10,17 +10,17 @@ const App: React.FC = () => {
   const [displayedText, setDisplayedText] = useState<string>('');
 
   useEffect(() => {
-    // テキストが変更されるたびに非同期関数を呼び出す
     const fetchData = async () => {
-      // await init('node_modules/assembler-by-wasm/assembler_by_wasm_bg.wasm');
-      await init();
-      // 非同期処理が完了した後にテキストを表示する状態を更新
+      if (process.env.NODE_ENV === 'development') {
+        await init('node_modules/assembler-by-wasm/assembler_by_wasm_bg.wasm');
+      } else {
+        await init();
+      }
       setDisplayedText(assemble(inputText, "16"));
     };
 
     fetchData();
-  }, [inputText]); // inputTextが変更された時だけuseEffectを実行
-
+  }, [inputText]);
 
   const renderMultilineText = (text: string) => {
     return text.split('\n').map((line, index) => (
